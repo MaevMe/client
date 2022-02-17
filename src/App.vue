@@ -29,7 +29,7 @@ ok.$subscribe((mutation, value) => {
     </div>
   </header>
 
-  <a href="http://localhost:5050/forward">
+  <a href="{{process.env.VUE_APP_SERVER}}/forward">
     <button>Sign in!</button>
   </a>
 
