@@ -7,9 +7,7 @@ export const useUserStore = defineStore('user', {
   getters: {},
   actions: {
     async getUser() {
-      this.user = await (
-        await axios.get('http://localhost:5050/me', { withCredentials: true })
-      ).data
+      this.user = await (await axios.get('https://api.maev.me/me', { withCredentials: true })).data
     },
   },
 })
