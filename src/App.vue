@@ -30,7 +30,7 @@ user.$subscribe((mutation, value) => {
   </header>
 
   <a href="https://api.maev.me/forward">
-    <button>Sign in!</button>
+    <button>Sign In</button>
   </a>
 
   <!-- <RouterView /> -->
