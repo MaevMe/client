@@ -36,9 +36,9 @@ user.$subscribe((mutation, value) => {
   <a href="https://api.maev.me/forward">
     <button>Sign In</button>
   </a>
-  <a href="https://api.maev.me/me" v-on:click="test">
-    <button>Sign In</button>
-  </a>
+  <div v-on:click="test">
+    <button>Test</button>
+  </div>
 
   <!-- <RouterView /> -->
 </template>
