@@ -20,7 +20,7 @@ user.$subscribe((mutation, value) => {
   <header>
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
-      {{ ok.user.username }}
+      {{ user.user.username }}
 
       <!-- <nav>
         <RouterLink to="/about">About</RouterLink>
