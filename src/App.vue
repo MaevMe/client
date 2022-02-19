@@ -11,6 +11,10 @@ onMounted(() => {
   user.getUser()
 })
 
+const test = () => {
+  user.getUser()
+}
+
 user.$subscribe((mutation, value) => {
   console.log('@user', value.user)
 })
@@ -30,6 +34,9 @@ user.$subscribe((mutation, value) => {
   </header>
 
   <a href="https://api.maev.me/forward">
+    <button>Sign In</button>
+  </a>
+  <a href="https://api.maev.me/me" v-on:click="test">
     <button>Sign In</button>
   </a>
 
