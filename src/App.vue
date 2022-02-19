@@ -19,7 +19,7 @@ user.$subscribe((mutation, value) => {
 <template>
   <header>
     <div class="wrapper">
-      <HelloWorld msg="You did it!" />
+      <HelloWorld msg="Just wait for the request to stop pending, and see the errors." />
       {{ user.user.username }}
 
       <!-- <nav>
@@ -33,13 +33,18 @@ user.$subscribe((mutation, value) => {
     <button>Sign in!</button>
   </a> -->
 
-  <h2>Just wait for the request to stop pending.</h2>
-
   <!-- <RouterView /> -->
 </template>
 
 <style lang="scss">
 #app {
   background: white;
+  display: grid;
+  place-content: center;
+  margin: 0 auto;
+  width: 50vw;
+  height: 95vh;
+  font-family: sans-serif;
+  text-align: center;
 }
 </style>
