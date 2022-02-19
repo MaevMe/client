@@ -5,13 +5,13 @@ import { onMounted } from 'vue'
 import HelloWorld from '@/components/HelloWorld.vue'
 import { useUserStore } from './stores/user'
 
-const ok = useUserStore()
+const user = useUserStore()
 
 onMounted(() => {
-  ok.getUser()
+  user.getUser()
 })
 
-ok.$subscribe((mutation, value) => {
+user.$subscribe((mutation, value) => {
   console.log('@user', value.user)
 })
 </script>
@@ -29,9 +29,11 @@ ok.$subscribe((mutation, value) => {
     </div>
   </header>
 
-  <a href="https://api.maev.me/forward">
+  <!-- <a href="https://api.maev.me/forward">
     <button>Sign in!</button>
-  </a>
+  </a> -->
+
+  <h2>Just wait for the request to stop pending.</h2>
 
   <!-- <RouterView /> -->
 </template>

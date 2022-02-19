@@ -1,7 +1,6 @@
 {
   "name": "vue",
   "version": "0.0.0",
-  "proxy": "https://www.maev.me",
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
