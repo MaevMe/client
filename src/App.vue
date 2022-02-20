@@ -7,9 +7,9 @@ import { useUserStore } from './stores/user'
 
 const user = useUserStore()
 
-onMounted(() => {
-  user.getUser()
-})
+// onMounted(() => {
+//   user.getUser()
+// })
 
 const test = () => {
   user.getUser()
