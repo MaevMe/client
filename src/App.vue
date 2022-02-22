@@ -40,7 +40,7 @@ user.$subscribe((mutation, value) => {
     <button>Test</button>
   </div>
 
-  <!-- <RouterView /> -->
+  <RouterView />
 </template>
 
 <style lang="scss">
