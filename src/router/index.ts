@@ -12,11 +12,6 @@ const router = createRouter({
       component: () => import('../views/AboutView.vue'),
     },
     {
-      path: '/new',
-      name: 'new',
-      component: () => import('../views/NewView.vue'),
-    },
-    {
       path: '/callback',
       name: 'callback',
       component: () => import('../views/Callback.vue'),
