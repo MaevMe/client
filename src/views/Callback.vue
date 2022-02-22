@@ -7,7 +7,7 @@
     const route = useRoute()
     const { code } = route.query
 
-    await axios.patch(`https://api.maev.me/callback?code=${code}`, {
+    await axios.get(`https://api.maev.me/callback?code=${code}`, {
       withCredentials: true,
     })
   })
