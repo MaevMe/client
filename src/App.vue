@@ -1,29 +1,31 @@
 <!-- TODO: Delete namecheap and super (notion) accounts -->
 
 <script setup lang="ts">
-import { onMounted } from 'vue'
-import HelloWorld from '@/components/HelloWorld.vue'
-import { useUserStore } from './stores/user'
+  import { onMounted } from 'vue'
+  import HelloWorld from '@/components/HelloWorld.vue'
+  import { useUserStore } from './stores/user'
 
-const user = useUserStore()
+  const user = useUserStore()
 
-// onMounted(() => {
-//   user.getUser()
-// })
+  // onMounted(() => {
+  //   user.getUser()
+  // })
 
-const test = () => {
-  user.getUser()
-}
+  const test = () => {
+    user.getUser()
+  }
 
-user.$subscribe((mutation, value) => {
-  console.log('@user', value.user)
-})
+  user.$subscribe((mutation, value) => {
+    console.log('@user', value.user)
+  })
 </script>
 
 <template>
   <header>
     <div class="wrapper">
-      <HelloWorld msg="Just wait for the request to stop pending, and see the errors." />
+      <HelloWorld
+        msg="Just wait for the request to stop pending, and see the errors."
+      />
       {{ user.user.username }}
 
       <!-- <nav>
@@ -44,14 +46,14 @@ user.$subscribe((mutation, value) => {
 </template>
 
 <style lang="scss">
-#app {
-  background: white;
-  display: grid;
-  place-content: center;
-  margin: 0 auto;
-  width: 50vw;
-  height: 95vh;
-  font-family: sans-serif;
-  text-align: center;
-}
+  #app {
+    background: white;
+    display: grid;
+    place-content: center;
+    margin: 0 auto;
+    width: 50vw;
+    height: 95vh;
+    font-family: sans-serif;
+    text-align: center;
+  }
 </style>
