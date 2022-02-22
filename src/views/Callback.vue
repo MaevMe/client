@@ -3,12 +3,18 @@
   import { onMounted } from 'vue'
   import { useRoute } from 'vue-router'
 
-  onMounted(() => {
+  onMounted(async () => {
     const route = useRoute()
-    console.log(route.query)
-    const code = route.query.code
-    axios.get(`https://api.maev.me/callback?code=${code}`, {
+    const { code } = route.query
+
+    await axios.get(`https://api.maev.me/callback?code=${code}`, {
       withCredentials: true,
     })
   })
 </script>
+
+<template>
+  <div>Redirecting</div>
+</template>
+
+<style lang="scss"></style>
