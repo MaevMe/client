@@ -7,9 +7,16 @@
     const route = useRoute()
     const { code } = route.query
 
-    await axios.get(`https://api.maev.me/callback?code=${code}`, {
-      withCredentials: true,
-    })
+    // window.location.href = `https://base-maev.herokuapp.com/callback?code=${code}`
+
+    const { data } = await axios.post(
+      'https://base-maev.herokuapp.com/callback',
+      {
+        code,
+      },
+      { withCredentials: true }
+    )
+    console.log('@data', data)
   })
 </script>
 
