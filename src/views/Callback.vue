@@ -10,7 +10,7 @@
     // window.location.href = `https://base-maev.herokuapp.com/callback?code=${code}`
 
     const { data } = await axios.post(
-      'https://base-maev.herokuapp.com/callback',
+      'https://api.maev.me/callback',
       {
         code,
       },

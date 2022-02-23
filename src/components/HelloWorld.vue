@@ -1,7 +1,7 @@
 <script setup lang="ts">
-defineProps<{
-  msg: string
-}>()
+  defineProps<{
+    msg: string
+  }>()
 </script>
 
 <template>
@@ -9,7 +9,7 @@ defineProps<{
 </template>
 
 <style scoped>
-h1 {
-  color: red;
-}
+  h1 {
+    color: red;
+  }
 </style>

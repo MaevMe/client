@@ -8,7 +8,7 @@
 
   const test = () => {
     user.getUser()
-  } 
+  }
 
   user.$subscribe((_, value) => {
     console.log('@user', value.user)
@@ -29,7 +29,7 @@
     </div>
   </header>
 
-  <a href="https://base-maev.herokuapp.com/forward">
+  <a href="https://api.maev.me/forward">
     <button>Sign In</button>
   </a>
   <div v-on:click="test">
