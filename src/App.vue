@@ -8,7 +8,7 @@
 
   const test = () => {
     user.getUser()
-  }
+  } 
 
   user.$subscribe((_, value) => {
     console.log('@user', value.user)
