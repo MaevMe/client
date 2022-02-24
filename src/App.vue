@@ -2,6 +2,7 @@
 
 <script setup lang="ts">
   import HelloWorld from '@/components/HelloWorld.vue'
+  import { onMounted } from 'vue'
   import { useUserStore } from './stores/user'
 
   const user = useUserStore()
@@ -9,6 +10,12 @@
   const test = () => {
     user.getUser()
   }
+
+  onMounted(() => {
+    if (localStorage.getItem('user')) {
+      console.log('user is logged in i guess')
+    }
+  })
 
   user.$subscribe((_, value) => {
     console.log('@user', value.user)

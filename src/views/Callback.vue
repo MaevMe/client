@@ -18,7 +18,11 @@
       },
       { withCredentials: true }
     )
-    console.log('@data', data)
+
+    if (data) {
+      localStorage.setItem('user', 'true')
+      window.location.href = 'https://www.maev.me'
+    }
   })
 </script>
 
