@@ -41,7 +41,7 @@
 
 <style lang="scss">
   #app {
-    background: white;
+    background: rgb(251, 251, 251);
     display: grid;
     place-content: center;
     margin: 0 auto;
