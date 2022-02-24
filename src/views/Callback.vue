@@ -12,7 +12,7 @@
     console.log('code:', code)
 
     const { data } = await axios.post(
-      'https://api.maev.me/callback',
+      'https://base-maev.herokuapp.com/callback',
       {
         code,
       },

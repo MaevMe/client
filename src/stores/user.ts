@@ -8,7 +8,7 @@ export const useUserStore = defineStore('user', {
   actions: {
     async getUser() {
       this.user = await (
-        await axios.patch('https://api.maev.me/me', {
+        await axios.patch('https://base-maev.herokuapp.com/me', {
           withCredentials: true,
         })
       ).data
