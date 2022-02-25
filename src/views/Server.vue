@@ -6,6 +6,7 @@
   onMounted(async () => {
     const route = useRoute()
     const { guildID } = route.params
+    console.log('guildID: ', guildID)
 
     const data = await axios.get(`https://api.maev.me/server/${guildID}`, {
       withCredentials: true,
