@@ -29,9 +29,9 @@
         msg="Just wait for the request to stop pending, and see the errors."
       />
       {{ user.user.username }}
-      <a v-for="guild in user.user.guilds" :href="`/server/${guild.id}`">{{
-        guild.name
-      }}</a>
+      <router-link :to="`/server/${guild.id}`" v-for="guild in user.user.guilds"
+        ><div>{{ guild.name }}</div></router-link
+      >
 
       <nav>
         <RouterLink to="/about">About</RouterLink>
