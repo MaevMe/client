@@ -8,7 +8,7 @@ export const useUserStore = defineStore('user', {
   actions: {
     async getUser() {
       this.user = await (
-        await axios.patch(
+        await axios.post(
           'https://api.maev.me/me',
           {},
           {
