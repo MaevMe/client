@@ -29,7 +29,7 @@
         msg="Just wait for the request to stop pending, and see the errors."
       />
       {{ user.user.username }}
-      {{ user.user.guilds.map(guild => guild.name) }}
+      <div v-for="guild in user.user.guilds">{{ guild.name }}</div>
 
       <nav>
         <RouterLink to="/about">About</RouterLink>
