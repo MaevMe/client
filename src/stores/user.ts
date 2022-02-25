@@ -1,8 +1,13 @@
 import { defineStore } from 'pinia'
-import type { RESTGetAPICurrentUserResult } from 'discord-api-types'
+import type {
+  RESTGetAPICurrentUserResult,
+  RESTGetAPICurrentUserGuildsResult,
+} from 'discord-api-types'
 import axios from 'axios'
 
-type User = RESTGetAPICurrentUserResult & { guilds: {} }
+type User = RESTGetAPICurrentUserResult & {
+  guilds: RESTGetAPICurrentUserGuildsResult
+}
 
 export const useUserStore = defineStore('user', {
   state: () => ({ user: {} as User }),

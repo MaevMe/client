@@ -29,7 +29,7 @@
         msg="Just wait for the request to stop pending, and see the errors."
       />
       {{ user.user.username }}
-      {{ user.user.guilds }}
+      {{ user.user.guilds.map(guild => guild.name) }}
 
       <nav>
         <RouterLink to="/about">About</RouterLink>
