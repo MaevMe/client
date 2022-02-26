@@ -14,11 +14,7 @@ export const useUserStore = defineStore('user', {
   getters: {},
   actions: {
     async getUser() {
-      this.user = await (
-        await api.post('/me', {}, { withCredentials: true })
-      ).data
-
-      console.log('we are getting a user')
+      this.user = await (await api.get('/me', { withCredentials: true })).data
     },
   },
 })
