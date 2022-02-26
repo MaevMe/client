@@ -15,6 +15,13 @@
     const { guildID } = route.params
 
     server = await (await api.get(`/server/${guildID}`, { withCredentials: true })).data
+    category.value = server?.value?.tempVoiceChannels.categoryID || ''
+    namingFormat.value = server?.value?.tempVoiceChannels.namingFormat || ''
+    createChannel.value = server?.value?.tempVoiceChannels.createChannel || ''
+  })
+
+  watch(server, value => {
+    console.log('@server', value)
   })
 
   onUnmounted(async () => {
@@ -22,16 +29,6 @@
     namingFormat.value = ''
     category.value = ''
     server.value = null
-  })
-
-  watch(server, value => {
-    console.log('@server', value)
-
-    if (value) {
-      category.value = value.tempVoiceChannels.categoryID
-      namingFormat.value = value.tempVoiceChannels.namingFormat
-      createChannel.value = value.tempVoiceChannels.createChannel
-    }
   })
 
   // const save = async () => {
