@@ -22,14 +22,12 @@ const router = createRouter({
   ],
 }).beforeEach((to, from, next) => {
   const publicViews = ['/', '/callback']
-  const needsAuth = !publicViews.includes(to.path)
-  console.log('path', to.path)
-
+  const needsAuth = publicViews.some(view => to.path.startsWith(view))
+  // !publicViews.includes(to.path)
   const user = useUserStore()
   const userIsLoggedIn = !!user.user.username
 
   if (needsAuth && !userIsLoggedIn) {
-    console.log('not authenticated')
     next('/')
   } else {
     next()
