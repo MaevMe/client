@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import axios from 'axios'
+  import api from '@/utils/api'
   import { onMounted } from 'vue'
   import { useRoute } from 'vue-router'
 
@@ -7,19 +7,13 @@
     const route = useRoute()
     const { code } = route.query
 
-    // window.location.href = `https://base-maev.herokuapp.com/callback?code=${code}`
-
-    console.log('code:', code)
-
-    const { data } = await axios.post(
-      'https://api.maev.me/callback',
-      {
-        code,
-      },
+    const { data: user } = await api.post(
+      '/callback',
+      { code },
       { withCredentials: true }
     )
 
-    if (data) {
+    if (user) {
       localStorage.setItem('user', 'true')
       window.location.href = 'https://www.maev.me'
     }
@@ -27,7 +21,7 @@
 </script>
 
 <template>
-  <div>Redirecting</div>
+  <h2>Getting user...</h2>
 </template>
 
 <style lang="scss"></style>

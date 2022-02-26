@@ -6,6 +6,7 @@
   import { onMounted } from 'vue'
 
   const user = useUserStore()
+  const userIsLoggedIn = !!user.user.username
 
   onMounted(() => {
     if (localStorage.getItem('user')) user.getUser()
@@ -21,16 +22,9 @@
     <Nav />
   </header>
 
-  <main v-if="user.user.username">
-    <router-link v-for="guild in user.user.guilds" :to="`/server/${guild.id}`">
-      <div>{{ guild.name }}</div>
-    </router-link>
+  <main v-if="userIsLoggedIn">
+    <RouterView />
   </main>
-  <main v-else>
-    <h1>No user logged in, so no guilds displayed.</h1>
-  </main>
-
-  <RouterView />
 </template>
 
 <style lang="scss">

@@ -1,24 +1,29 @@
 <script setup lang="ts">
   import { useUserStore } from '../stores/user'
   const user = useUserStore()
+  const userIsLoggedIn = !!user.user.username
 </script>
 
 <template>
-  <div v-if="user.user.username">
-    {{ user.user.username }}
+  <nav>
+    <h1>Maev</h1>
 
-    <RouterLink to="/about">About</RouterLink>
-  </div>
+    <div v-if="userIsLoggedIn">
+      {{ user.user.username }}
+      <!-- <RouterLink to="/about">About</RouterLink> -->
+    </div>
 
-  <div v-else>
-    <a href="https://api.maev.me/forward">
-      <button>Sign In</button>
-    </a>
-  </div>
+    <div v-else>
+      <a href="https://api.maev.me/forward">
+        <button>Sign In</button>
+      </a>
+    </div>
+  </nav>
 </template>
 
 <style scoped>
-  h1 {
-    color: red;
+  nav {
+    display: flex;
+    gap: 1.5rem;
   }
 </style>
