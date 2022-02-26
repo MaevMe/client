@@ -11,7 +11,9 @@
     const route = useRoute()
     const { guildID } = route.params
 
-    server = await (await api.get(`/server/${guildID}`, { withCredentials: true })).data
+    server.value = (await (
+      await api.get(`/server/${guildID}`, { withCredentials: true })
+    ).data) as Server
   })
 
   watch(server, value => {
