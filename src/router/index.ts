@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useUserStore } from '../stores/user'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -22,14 +23,14 @@ const router = createRouter({
       component: () => import('../views/Server.vue'),
     },
   ],
-})
+}).beforeEach((to, from, next) => {
+  const publicViews = ['/', '/callback']
+  const needsAuth = !publicViews.includes(to.path)
 
-router.beforeEach((to, from, next) => {
-  const publicPages = ['/', '/callback']
-  const authRequired = !publicPages.includes(to.path)
-  const userIsLoggedIn = localStorage.getItem('user')
+  const user = useUserStore()
+  const userIsLoggedIn = !!user.user.username
 
-  if (authRequired && !userIsLoggedIn) {
+  if (needsAuth && !userIsLoggedIn) {
     next('/')
   } else {
     next()
