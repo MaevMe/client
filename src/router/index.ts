@@ -26,9 +26,7 @@ const router = createRouter({
       path: '/server/:guildID',
       name: 'server',
       components: {
-        default: () => {
-          window.location.href = 'https://www.maev.me'
-        },
+        default: () => import('../views/Home.vue'),
         user: () => import('../views/Server.vue'),
       },
     },
