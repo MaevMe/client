@@ -5,15 +5,10 @@
   import { useUserStore } from './stores/user'
   import { onMounted } from 'vue'
 
-  const user = useUserStore()
-  const userIsLoggedIn = !!user.user.username
+  const userStore = useUserStore()
 
   onMounted(() => {
-    if (localStorage.getItem('user')) user.getUser()
-  })
-
-  user.$subscribe((_, value) => {
-    console.log('@user', value.user)
+    if (localStorage.getItem('user')) userStore.getUser()
   })
 </script>
 

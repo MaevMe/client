@@ -2,11 +2,11 @@
 
 <script setup lang="ts">
   import { useUserStore } from '../stores/user'
-  const user = useUserStore()
+  const { user } = useUserStore()
 </script>
 
 <template>
-  <RouterLink v-for="guild in user.user.guilds" :to="`/server/${guild.id}`">
+  <RouterLink v-for="guild in user?.guilds" :to="`/server/${guild.id}`">
     <div className="guild">{{ guild.name }}</div>
   </RouterLink>
 </template>

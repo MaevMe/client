@@ -1,15 +1,14 @@
 <script setup lang="ts">
   import { useUserStore } from '../stores/user'
-  const user = useUserStore()
-  const userIsLoggedIn = !!user.user.username
+  const { user } = useUserStore()
 </script>
 
 <template>
   <nav>
     <h1>Maev</h1>
 
-    <div v-if="userIsLoggedIn">
-      {{ user.user.username }}
+    <div v-if="user?.username">
+      {{ user.username }}
       <!-- <RouterLink to="/about">About</RouterLink> -->
     </div>
 

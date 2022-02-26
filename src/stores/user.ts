@@ -10,7 +10,7 @@ type User = RESTGetAPICurrentUserResult & {
 }
 
 export const useUserStore = defineStore('user', {
-  state: () => ({ user: {} as User }),
+  state: () => ({ user: null as null | User }),
   getters: {},
   actions: {
     async getUser() {
