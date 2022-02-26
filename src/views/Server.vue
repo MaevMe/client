@@ -12,6 +12,7 @@
   onMounted(async () => {
     const route = useRoute()
     const { guildID } = route.params
+
     console.log('guildID: ', guildID)
 
     server = await (
@@ -44,7 +45,7 @@
 </script>
 
 <template>
-  <div>{{ server }}</div>
+  <div>{{ server.name }}</div>
 
   <div>
     Channel to join:

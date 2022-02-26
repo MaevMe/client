@@ -1,20 +1,14 @@
 <!-- TODO: Delete namecheap and super (notion) accounts -->
 
 <script setup lang="ts">
-  import HelloWorld from '@/components/HelloWorld.vue'
-  import { onMounted } from 'vue'
+  import Nav from './components/Nav.vue'
   import { useUserStore } from './stores/user'
+  import { onMounted } from 'vue'
 
   const user = useUserStore()
 
-  const test = () => {
-    user.getUser()
-  }
-
   onMounted(() => {
-    if (localStorage.getItem('user')) {
-      console.log('user is logged in i guess')
-    }
+    if (localStorage.getItem('user')) user.getUser()
   })
 
   user.$subscribe((_, value) => {
@@ -24,27 +18,17 @@
 
 <template>
   <header>
-    <div class="wrapper">
-      <HelloWorld
-        msg="Just wait for the request to stop pending, and see the errors."
-      />
-      {{ user.user.username }}
-      <router-link :to="`/server/${guild.id}`" v-for="guild in user.user.guilds"
-        ><div>{{ guild.name }}</div></router-link
-      >
-
-      <nav>
-        <RouterLink to="/about">About</RouterLink>
-      </nav>
-    </div>
+    <Nav />
   </header>
 
-  <a href="https://api.maev.me/forward">
-    <button>Sign In</button>
-  </a>
-  <div v-on:click="test">
-    <button>Test</button>
-  </div>
+  <main v-if="user.user.username">
+    <router-link v-for="guild in user.user.guilds" :to="`/server/${guild.id}`">
+      <div>{{ guild.name }}</div>
+    </router-link>
+  </main>
+  <main v-else>
+    <h1>No user logged in, so no guilds displayed.</h1>
+  </main>
 
   <RouterView />
 </template>
