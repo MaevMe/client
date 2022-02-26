@@ -17,12 +17,7 @@ const router = createRouter({
     {
       path: '/callback',
       name: 'callback',
-      components: {
-        default: () => import('../views/Callback.vue'),
-        // user: () => {
-        //   window.location.href = 'https://www.maev.me'
-        // },
-      },
+      component: () => import('../views/Callback.vue'),
     },
     {
       path: '/server/:guildID',
