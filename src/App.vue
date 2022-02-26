@@ -22,7 +22,7 @@
     <Nav />
   </header>
 
-  <main v-if="userIsLoggedIn">
+  <main>
     <RouterView />
   </main>
 </template>
