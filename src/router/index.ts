@@ -23,18 +23,18 @@ const router = createRouter({
   ],
 })
 
-router.beforeEach((to, from, next) => {
-  const publicViews = ['/', '/callback']
-  const needsAuth = publicViews.some(view => !to.path.startsWith(view))
+// router.beforeEach((to, from, next) => {
+//   const publicViews = ['/', '/callback']
+//   const needsAuth = !publicViews.some(view => to.path.startsWith(view))
 
-  const { user } = storeToRefs(useUserStore())
-  const userIsLoggedIn = !!user.value?.username
+//   const { user } = storeToRefs(useUserStore())
+//   const userIsLoggedIn = !!user.value?.username
 
-  if (needsAuth && !userIsLoggedIn) {
-    next('/')
-  } else {
-    next()
-  }
-})
+//   if (needsAuth && !userIsLoggedIn) {
+//     next('/')
+//   } else {
+//     next()
+//   }
+// })
 
 export default router
