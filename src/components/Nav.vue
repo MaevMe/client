@@ -1,15 +1,6 @@
 <script setup lang="ts">
   import { useUserStore } from '../stores/user'
-  import { onMounted } from 'vue'
   const user = useUserStore()
-
-  onMounted(() => {
-    if (localStorage.getItem('user')) user.getUser()
-  })
-
-  user.$subscribe((_, value) => {
-    console.log('@user', value.user)
-  })
 </script>
 
 <template>
