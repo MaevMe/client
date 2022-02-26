@@ -7,13 +7,13 @@
     const route = useRoute()
     const { code } = route.query
 
-    const { data: user } = await api.post(
+    const { data } = await api.post(
       '/callback',
       { code },
       { withCredentials: true }
     )
 
-    if (user) {
+    if (data) {
       localStorage.setItem('user', 'true')
       window.location.href = 'https://www.maev.me'
     }
