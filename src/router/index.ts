@@ -19,9 +19,9 @@ const router = createRouter({
       name: 'callback',
       components: {
         default: () => import('../views/Callback.vue'),
-        user: () => {
-          window.location.href = 'https://www.maev.me'
-        },
+        // user: () => {
+        //   window.location.href = 'https://www.maev.me'
+        // },
       },
     },
     {
