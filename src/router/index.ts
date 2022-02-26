@@ -23,6 +23,7 @@ const router = createRouter({
 }).beforeEach((to, from, next) => {
   const publicViews = ['/', '/callback']
   const needsAuth = !publicViews.includes(to.path)
+  console.log('path', to.path)
 
   const user = useUserStore()
   const userIsLoggedIn = !!user.user.username
