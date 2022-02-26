@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import api from '@/utils/api'
-  import { onMounted, ref } from 'vue'
+  import { onMounted, ref, watch } from 'vue'
   import { useRoute } from 'vue-router'
 
   const createChannel = ref()
@@ -14,10 +14,10 @@
     const { guildID } = route.params
 
     server = await (await api.get(`/server/${guildID}`, { withCredentials: true })).data
+  })
 
-    createChannel.value = server.tempVoiceChannels.createChannel
-    namingFormat.value = server.tempVoiceChannels.namingFormat
-    category.value = server.tempVoiceChannels.category
+  watch(server, value => {
+    console.log('@server', value)
   })
 
   // const save = async () => {
