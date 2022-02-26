@@ -6,7 +6,7 @@
   const createChannel = ref()
   const namingFormat = ref()
   const category = ref()
-  let server: any
+  let server: any = {}
   let saved = ''
 
   onMounted(async () => {
