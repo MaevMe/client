@@ -4,9 +4,6 @@
   import { useRoute } from 'vue-router'
   import type Server from '../types/Server'
 
-  let createChannel = ref('')
-  let namingFormat = ref('')
-  let category = ref('')
   let server = ref<null | Server>(null)
   let saved = ''
 
@@ -15,9 +12,6 @@
     const { guildID } = route.params
 
     server = await (await api.get(`/server/${guildID}`, { withCredentials: true })).data
-    category.value = server?.value?.tempVoiceChannels.categoryID || ''
-    namingFormat.value = server?.value?.tempVoiceChannels.namingFormat || ''
-    createChannel.value = server?.value?.tempVoiceChannels.createChannel || ''
   })
 
   watch(server, value => {
@@ -25,9 +19,6 @@
   })
 
   onUnmounted(async () => {
-    createChannel.value = ''
-    namingFormat.value = ''
-    category.value = ''
     server.value = null
   })
 
@@ -54,7 +45,7 @@
 
   <div class="settings-card">
     Channel to join:
-    <select v-model="createChannel" v-if="server?.voiceChannels">
+    <select v-model="server.tempVoiceChannels.createChannel" v-if="server">
       <option v-for="channel in server.voiceChannels" value="channel.id">
         {{ channel.name }}
       </option>
@@ -63,12 +54,12 @@
 
   <div class="settings-card">
     Name format:
-    <input v-model="namingFormat" type="text" />
+    <input v-if="server" v-model="server.tempVoiceChannels.namingFormat" type="text" />
   </div>
 
   <div class="settings-card">
     Category:
-    <select v-model="category" v-if="server?.categories">
+    <select v-model="server.tempVoiceChannels.createChannel" v-if="server">
       <option v-for="channel in server.categories" value="channel.id">
         {{ channel.name }}
       </option>
