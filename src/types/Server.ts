@@ -1,3 +1,5 @@
+import type { APIChannel } from 'discord-api-types/v9'
+
 type Server = {
   id: string
   name: string
@@ -7,8 +9,8 @@ type Server = {
     namingFormat: string
     categoryID: string
   }
-  categories: any[]
-  voiceChannels: any[]
+  categories: APIChannel[]
+  voiceChannels: APIChannel[]
 }
 
 export default Server

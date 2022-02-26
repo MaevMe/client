@@ -1,8 +1,11 @@
 <script setup lang="ts">
   import api from '@/utils/api'
-  import { onMounted, onUnmounted, ref, watch } from 'vue'
-  import { useRoute } from 'vue-router'
   import type Server from '../types/Server'
+  import { onMounted, ref, watch } from 'vue'
+  import { useUserStore } from '../stores/user'
+  import { storeToRefs } from 'pinia'
+  import { useRoute } from 'vue-router'
+  const { user } = storeToRefs(useUserStore())
 
   let server = ref<null | Server>(null)
   let saved = ''
@@ -17,11 +20,9 @@
   })
 
   watch(server, value => {
-    console.log('@server', value)
-  })
-
-  onUnmounted(async () => {
-    server.value = null
+    if (!user.value?.guilds.some(({ id }) => id === value?.id)) {
+      window.location.href = 'https://www.maev.me'
+    }
   })
 
   // const save = async () => {
@@ -45,6 +46,7 @@
 <template>
   <div>{{ server?.name }}</div>
 
+  {{ user?.guilds }}
   <div class="settings-card">
     Channel to join:
     <select v-model="server.tempVoiceChannels.createChannel" v-if="server">
