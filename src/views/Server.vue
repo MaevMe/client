@@ -1,47 +1,41 @@
 <script setup lang="ts">
-  import axios from 'axios'
+  import api from '@/utils/api'
   import { onMounted, ref } from 'vue'
   import { useRoute } from 'vue-router'
 
   const createChannel = ref()
   const namingFormat = ref()
   const category = ref()
-  let server: any = {}
+  let server: any = ref({})
   let saved = ''
 
   onMounted(async () => {
     const route = useRoute()
     const { guildID } = route.params
 
-    console.log('guildID: ', guildID)
-
-    server = await (
-      await axios.get(`https://api.maev.me/server/${guildID}`, {
-        withCredentials: true,
-      })
-    ).data
+    server = await (await api.get(`/server/${guildID}`, { withCredentials: true })).data
 
     createChannel.value = server.tempVoiceChannels.createChannel
     namingFormat.value = server.tempVoiceChannels.namingFormat
     category.value = server.tempVoiceChannels.category
   })
 
-  const save = async () => {
-    const route = useRoute()
-    const { guildID } = route.params
+  // const save = async () => {
+  //   const route = useRoute()
+  //   const { guildID } = route.params
 
-    server.tempVoiceChannels.createChannel = createChannel.value
-    server.tempVoiceChannels.namingFormat = namingFormat.value
-    server.tempVoiceChannels.category = category.value
+  //   server.tempVoiceChannels.createChannel = createChannel.value
+  //   server.tempVoiceChannels.namingFormat = namingFormat.value
+  //   server.tempVoiceChannels.category = category.value
 
-    try {
-      await axios.post(`https://api.maev.me/server/${guildID}`)
-      saved = 'Saved'
-    } catch (err) {
-      console.error(err)
-      saved = 'Unable to save'
-    }
-  }
+  //   try {
+  //     await api.post(`/server/${guildID}`)
+  //     saved = 'Saved'
+  //   } catch (err) {
+  //     console.error(err)
+  //     saved = 'Unable to save'
+  //   }
+  // }
 </script>
 
 <template>
@@ -70,8 +64,8 @@
     </select>
   </div>
 
-  <button v-on:click="save">Save</button>
-  {{ saved }}
+  <!-- <button v-on:click="save">Save</button>
+  {{ saved }} -->
 </template>
 
 <style lang="scss"></style>
