@@ -17,7 +17,10 @@ const router = createRouter({
     {
       path: '/callback',
       name: 'callback',
-      component: () => import('../views/Callback.vue'),
+      components: {
+        default: () => import('../views/Callback.vue'),
+        user: () => import('../views/Callback.vue'),
+      },
     },
     {
       path: '/server/:guildID',
