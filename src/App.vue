@@ -18,7 +18,8 @@
   </header>
 
   <main>
-    <RouterView />
+    <RouterView name="user" v-if="userStore" />
+    <RouterView v-else />
   </main>
 </template>
 
