@@ -20,18 +20,20 @@ const router = createRouter({
       component: () => import('../views/Server.vue'),
     },
   ],
-}).beforeEach((to, from, next) => {
-  const publicViews = ['/', '/callback']
-  const needsAuth = publicViews.some(view => to.path.startsWith(view))
-  // !publicViews.includes(to.path)
-  const user = useUserStore()
-  const userIsLoggedIn = !!user.user.username
-
-  if (needsAuth && !userIsLoggedIn) {
-    next('/')
-  } else {
-    next()
-  }
 })
+
+// router.beforeEach((to, from, next) => {
+//   const publicViews = ['/', '/callback']
+//   const needsAuth = publicViews.some(view => to.path.startsWith(view))
+
+//   const user = useUserStore()
+//   const userIsLoggedIn = !!user.user.username
+
+//   if (needsAuth && !userIsLoggedIn) {
+//     next('/')
+//   } else {
+//     next()
+//   }
+// })
 
 export default router
