@@ -1,6 +1,6 @@
 <script setup lang="ts">
   import api from '@/utils/api'
-  import { onMounted, ref, watch } from 'vue'
+  import { onMounted, onUnmounted, ref, watch } from 'vue'
   import { useRoute } from 'vue-router'
   import type Server from '../types/Server'
 
@@ -15,6 +15,13 @@
     const { guildID } = route.params
 
     server = await (await api.get(`/server/${guildID}`, { withCredentials: true })).data
+  })
+
+  onUnmounted(async () => {
+    createChannel.value = ''
+    namingFormat.value = ''
+    category.value = ''
+    server.value = null
   })
 
   watch(server, value => {
