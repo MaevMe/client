@@ -7,9 +7,6 @@ const router = createRouter({
     {
       path: '/',
       name: 'guilds',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import('../views/Guilds.vue'),
     },
     {
@@ -31,6 +28,7 @@ const router = createRouter({
   const userIsLoggedIn = !!user.user.username
 
   if (needsAuth && !userIsLoggedIn) {
+    console.log('not authenticated')
     next('/')
   } else {
     next()
