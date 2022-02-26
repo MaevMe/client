@@ -8,33 +8,33 @@ const router = createRouter({
     {
       path: '/',
       name: 'guilds',
-      component: () => import('../views/Guilds.vue'),
+      // component: () => import('../views/Guilds.vue'),
+      components: {
+        default: () => import('../views/Home.vue'),
+        user: () => import('../views/Guilds.vue'),
+      },
     },
     {
       path: '/callback',
       name: 'callback',
-      component: () => import('../views/Callback.vue'),
+      components: {
+        default: () => import('../views/Callback.vue'),
+        user: () => {
+          window.location.href = 'https://www.maev.me'
+        },
+      },
     },
     {
       path: '/server/:guildID',
       name: 'server',
-      component: () => import('../views/Server.vue'),
+      components: {
+        default: () => {
+          window.location.href = 'https://www.maev.me'
+        },
+        user: () => import('../views/Server.vue'),
+      },
     },
   ],
 })
-
-// router.beforeEach((to, from, next) => {
-//   const publicViews = ['/', '/callback']
-//   const needsAuth = !publicViews.some(view => to.path.startsWith(view))
-
-//   const { user } = storeToRefs(useUserStore())
-//   const userIsLoggedIn = !!user.value?.username
-
-//   if (needsAuth && !userIsLoggedIn) {
-//     next('/')
-//   } else {
-//     next()
-//   }
-// })
 
 export default router
