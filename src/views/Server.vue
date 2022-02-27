@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  import router from '@/router'
   import api from '@/utils/api'
   import type Server from '../types/Server'
   import { onMounted, ref, watch } from 'vue'
@@ -21,7 +22,7 @@
 
   watch(server, value => {
     if (!user.value?.guilds.some(({ id }) => id === value?.id)) {
-      window.location.href = import.meta.env.VITE_CLIENT as string
+      router.push('/')
     }
   })
 

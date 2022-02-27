@@ -9,6 +9,8 @@
 
   onMounted(() => {
     if (localStorage.getItem('user')) userStore.getUser()
+    // TODO: Research if there are better methods to set meta data
+    document.title = 'Hello World'
   })
 </script>
 

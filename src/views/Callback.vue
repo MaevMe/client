@@ -1,4 +1,5 @@
 <script setup lang="ts">
+  import router from '@/router'
   import api from '@/utils/api'
   import { onMounted } from 'vue'
   import { useRoute } from 'vue-router'
@@ -13,7 +14,8 @@
 
     if (session) {
       localStorage.setItem('user', 'true')
-      window.location.href = import.meta.env.VITE_CLIENT as string
+      // TODO: Avoid needing a hard refresh to update user
+      router.push('/')
     }
   })
 </script>

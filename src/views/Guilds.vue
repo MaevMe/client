@@ -1,5 +1,3 @@
-<!-- TODO: Delete namecheap and super (notion) accounts -->
-
 <script setup lang="ts">
   import { useUserStore } from '../stores/user'
   import { storeToRefs } from 'pinia'
