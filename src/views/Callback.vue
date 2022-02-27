@@ -13,7 +13,7 @@
 
     if (session) {
       localStorage.setItem('user', 'true')
-      window.location.href = 'https://www.maev.me'
+      window.location.href = import.meta.env.VITE_CLIENT as string
     }
   })
 </script>

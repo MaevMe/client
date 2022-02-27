@@ -14,7 +14,7 @@
     </div>
 
     <div v-else>
-      <a href="https://api.maev.me/forward">
+      <a href="import.meta.env.SERVER + '/forward'">
         <button>Sign In</button>
       </a>
     </div>

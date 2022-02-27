@@ -21,7 +21,7 @@
 
   watch(server, value => {
     if (!user.value?.guilds.some(({ id }) => id === value?.id)) {
-      window.location.href = 'https://www.maev.me'
+      window.location.href = import.meta.env.VITE_CLIENT as string
     }
   })
 
