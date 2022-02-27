@@ -17,4 +17,6 @@ type Server = {
   voiceChannels: APIChannel[]
 }
 
-export default Server
+type blah = any
+
+export default blah

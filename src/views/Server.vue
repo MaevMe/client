@@ -20,19 +20,25 @@
     ).data) as Server
   })
 
-  watch(server, value => {
-    if (!user.value?.guilds.some(({ id }) => id === value?.id)) {
-      router.push('/')
-    }
-  })
+  watch(
+    server,
+    value => {
+      console.log('@server', server.value)
+
+      if (!user.value?.guilds.some(({ id }) => id === value?.id)) {
+        router.push('/')
+      }
+    },
+    { deep: true }
+  )
 
   const routerTest = useRoute()
-
   const save = async () => {
     const { guildID } = routerTest.params
 
     try {
-      await api.post(`/server/${guildID}`, { serverData: server.value })
+      const ok = await api.post(`/server/${guildID}`, server.value)
+      console.log(ok)
       saved = 'Saved'
     } catch (err) {
       console.error(err)
@@ -42,59 +48,81 @@
 </script>
 
 <template>
-  <div>{{ server?.name }}</div>
+  <div class="settings">
+    <div v-if="server">{{ server?.guild.name }}</div>
 
-  {{ user?.guilds }}
-  <div class="settings-card">
-    Channel to join:
-    <select v-model="server.tempVoiceChannels.createChannel" v-if="server">
-      <option
-        v-for="channel in server.voiceChannels"
-        value="channel.id"
-        :selected="server.tempVoiceChannels.createChannel === channel.id"
-      >
-        {{ channel.name }}
-      </option>
-      <option v-if="!server.tempVoiceChannels.createChannel" disabled selected hidden>
-        Pick existing VC
-      </option>
-    </select>
+    <div class="column">
+      <div class="settings-card">
+        Name format:
+        <input v-if="server" v-model="server.tempVoiceChannels.namingFormat" type="text" />
+      </div>
+    </div>
+
+    <div class="column">
+      <div class="settings-card">
+        <select v-model="server.tempVoiceChannels.createChannel" v-if="server">
+          <option v-if="!server.tempVoiceChannels.createChannel" value="" disabled selected hidden>
+            Pick existing VC
+          </option>
+
+          <option
+            v-for="channel in server.voiceChannels"
+            :value="channel.id"
+            :selected="server.tempVoiceChannels.createChannel === channel.id">
+            {{ channel.name }}
+          </option>
+        </select>
+
+        <div class="settings-card">
+          <select v-model="server.tempVoiceChannels.categoryID" v-if="server">
+            <option v-if="!server.tempVoiceChannels.categoryID" value="" disabled selected hidden>
+              Pick existing Category
+            </option>
+
+            <option
+              v-for="channel in server.categories"
+              :value="channel.id"
+              :selected="server.tempVoiceChannels.categoryID === channel.id">
+              {{ channel.name }}
+            </option>
+          </select>
+        </div>
+
+        <div>
+          <input
+            type="checkbox"
+            v-model="server.tempVoiceChannels.usingCreatedChannels"
+            v-if="server" />
+          Create for me
+        </div>
+      </div>
+    </div>
+
+    <button @click.prevent="save">Save</button>
   </div>
-
-  <div class="settings-card">
-    Name format:
-    <input v-if="server" v-model="server.tempVoiceChannels.namingFormat" type="text" />
-  </div>
-
-  <div class="settings-card">
-    Category:
-    <select v-model="server.tempVoiceChannels.createChannel" v-if="server">
-      <option
-        v-for="channel in server.categories"
-        value="channel.id"
-        :selected="server.tempVoiceChannels.categoryID === channel.id"
-      >
-        {{ channel.name }}
-      </option>
-      <option v-if="!server.tempVoiceChannels.categoryID" disabled selected hidden>
-        Pick existing Category
-      </option>
-    </select>
-  </div>
-
-  <div>
-    Create voice channels for me:
-    <input type="checkbox" v-model="server.tempVoiceChannels.usingCreatedChannels" v-if="server" />
-  </div>
-
-  <button @click.prevent="save">Save</button>
-
-  <!-- <button v-on:click="save">Save</button>
-  {{ saved }} -->
 </template>
 
 <style lang="scss">
-  .settings-card {
-    background: grey;
+  .settings {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(18.75rem, 1fr));
+    justify-content: center;
+    gap: 1rem;
+    width: max-content;
+    width: calc(80vw - 18rem);
+    padding: 2rem;
+    color: black;
+
+    .column {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    &-card {
+      background: grey;
+      border-radius: 0.5rem;
+      padding: 1rem;
+    }
   }
 </style>
