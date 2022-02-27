@@ -26,22 +26,19 @@
     }
   })
 
-  // const save = async () => {
-  //   const route = useRoute()
-  //   const { guildID } = route.params
+  const routerTest = useRoute()
 
-  //   server.tempVoiceChannels.createChannel = createChannel.value
-  //   server.tempVoiceChannels.namingFormat = namingFormat.value
-  //   server.tempVoiceChannels.category = category.value
+  const save = async () => {
+    const { guildID } = routerTest.params
 
-  //   try {
-  //     await api.post(`/server/${guildID}`)
-  //     saved = 'Saved'
-  //   } catch (err) {
-  //     console.error(err)
-  //     saved = 'Unable to save'
-  //   }
-  // }
+    try {
+      await api.post(`/server/${guildID}`, { serverData: server.value })
+      saved = 'Saved'
+    } catch (err) {
+      console.error(err)
+      saved = 'Unable to save'
+    }
+  }
 </script>
 
 <template>
@@ -51,8 +48,15 @@
   <div class="settings-card">
     Channel to join:
     <select v-model="server.tempVoiceChannels.createChannel" v-if="server">
-      <option v-for="channel in server.voiceChannels" value="channel.id">
+      <option
+        v-for="channel in server.voiceChannels"
+        value="channel.id"
+        :selected="server.tempVoiceChannels.createChannel === channel.id"
+      >
         {{ channel.name }}
+      </option>
+      <option v-if="!server.tempVoiceChannels.createChannel" disabled selected hidden>
+        Pick existing VC
       </option>
     </select>
   </div>
@@ -65,11 +69,25 @@
   <div class="settings-card">
     Category:
     <select v-model="server.tempVoiceChannels.createChannel" v-if="server">
-      <option v-for="channel in server.categories" value="channel.id">
+      <option
+        v-for="channel in server.categories"
+        value="channel.id"
+        :selected="server.tempVoiceChannels.categoryID === channel.id"
+      >
         {{ channel.name }}
+      </option>
+      <option v-if="!server.tempVoiceChannels.categoryID" disabled selected hidden>
+        Pick existing Category
       </option>
     </select>
   </div>
+
+  <div>
+    Create voice channels for me:
+    <input type="checkbox" v-model="server.tempVoiceChannels.usingCreatedChannels" v-if="server" />
+  </div>
+
+  <button @click.prevent="save">Save</button>
 
   <!-- <button v-on:click="save">Save</button>
   {{ saved }} -->
