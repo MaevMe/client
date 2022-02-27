@@ -2,6 +2,8 @@
   import { useUserStore } from '../stores/user'
   import { storeToRefs } from 'pinia'
   const { user } = storeToRefs(useUserStore())
+
+  const forwardURL = import.meta.env.VITE_SERVER + '/forward'
 </script>
 
 <template>
@@ -14,7 +16,7 @@
     </div>
 
     <div v-else>
-      <a :href="`${import.meta.env.SERVER}/forward`">
+      <a :href="forwardURL">
         <button>Sign In</button>
       </a>
     </div>
