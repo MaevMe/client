@@ -25,15 +25,30 @@
   </main>
 </template>
 
+<style lang="scss" src="./scss/reset.scss"></style>
+
 <style lang="scss">
+  @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;700&display=swap');
+
+  body {
+    background: $black;
+    color: $white;
+  }
+
   #app {
-    background: white;
     display: grid;
     place-content: center;
     margin: 0 auto;
-    width: 50vw;
+    width: 70vw;
     height: 95vh;
-    font-family: sans-serif;
-    text-align: center;
+    font-family: 'Quicksand', sans-serif;
+
+    & > main {
+      width: 70vw;
+
+      & > div {
+        width: 100%;
+      }
+    }
   }
 </style>
