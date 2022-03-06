@@ -3,9 +3,11 @@
   import api from '@/utils/api'
   import { onMounted } from 'vue'
   import { useRoute } from 'vue-router'
+  import { useUserStore } from '../stores/user'
 
   onMounted(async () => {
     const route = useRoute()
+    const userStore = useUserStore()
     const { code } = route.query
 
     const {
@@ -14,8 +16,7 @@
 
     if (session) {
       localStorage.setItem('user', 'true')
-      // TODO: Avoid needing a hard refresh to update user
-      router.push('/')
+      userStore.getUser().then(() => router.push('/'))
     }
   })
 </script>
