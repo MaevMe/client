@@ -1,22 +1,24 @@
-import type { APIChannel } from 'discord-api-types/v9'
+import type { APIGuild } from 'discord-api-types/v9'
+
+type Channel = {
+  id: string
+  name: string
+}
 
 type Server = {
   id: string
-  _id: string
-  name: string
   tempVoiceChannels: {
     active: boolean
-    createChannel: string
+    createChannelID: string
     namingFormat: string
     categoryID: string
     userLimit: number
     includeTextChannel: boolean
     usingCreatedChannels: boolean
   }
-  categories: APIChannel[]
-  voiceChannels: APIChannel[]
+  guild: APIGuild
+  categories: Channel[]
+  voiceChannels: Channel[]
 }
 
-type blah = any
-
-export default blah
+export default Server

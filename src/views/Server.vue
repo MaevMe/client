@@ -23,9 +23,7 @@
   watch(
     server,
     value => {
-      console.log('@server', server.value)
-
-      if (!user.value?.guilds.some(({ id }) => id === value?.id)) {
+      if (!user.value?.guilds.some(({ id }) => id === value?.guild.id)) {
         router.push('/')
       }
     },
@@ -49,9 +47,11 @@
 
 <template>
   <div class="settings">
-    <div v-if="server">{{ server?.guild.name }}</div>
-
     <div class="column">
+      <div class="settings-card">
+        {{ server?.guild.name }}
+      </div>
+
       <div class="settings-card">
         Name format:
         <input v-if="server" v-model="server.tempVoiceChannels.namingFormat" type="text" />
@@ -60,15 +60,25 @@
 
     <div class="column">
       <div class="settings-card">
-        <select v-model="server.tempVoiceChannels.createChannel" v-if="server">
-          <option v-if="!server.tempVoiceChannels.createChannel" value="" disabled selected hidden>
+        Use temp vc
+        <input type="checkbox" v-model="server.tempVoiceChannels.active" v-if="server" />
+      </div>
+
+      <div class="settings-card">
+        <select v-model="server.tempVoiceChannels.createChannelID" v-if="server">
+          <option
+            v-if="!server.tempVoiceChannels.createChannelID"
+            value=""
+            disabled
+            selected
+            hidden>
             Pick existing VC
           </option>
 
           <option
             v-for="channel in server.voiceChannels"
             :value="channel.id"
-            :selected="server.tempVoiceChannels.createChannel === channel.id">
+            :selected="server.tempVoiceChannels.createChannelID === channel.id">
             {{ channel.name }}
           </option>
         </select>
@@ -108,10 +118,10 @@
     grid-template-columns: repeat(auto-fit, minmax(18.75rem, 1fr));
     justify-content: center;
     gap: 1rem;
+
     width: max-content;
     width: calc(80vw - 18rem);
     padding: 2rem;
-    color: black;
 
     .column {
       display: flex;
@@ -120,9 +130,15 @@
     }
 
     &-card {
-      background: grey;
+      background: $neutral150;
       border-radius: 0.5rem;
       padding: 1rem;
     }
+  }
+
+  input,
+  option,
+  select {
+    color: $black;
   }
 </style>
