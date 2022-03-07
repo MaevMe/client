@@ -1,7 +1,10 @@
 <script setup lang="ts">
   import { useUserStore } from '../stores/user'
   import { storeToRefs } from 'pinia'
+  import api from '@/utils/api'
+
   const { user } = storeToRefs(useUserStore())
+  const userState = useUserStore()
 
   const forwardURL = import.meta.env.VITE_SERVER + '/forward'
 </script>
@@ -13,6 +16,7 @@
     <div v-if="user?.username">
       {{ user.username }}
       <!-- <RouterLink to="/about">About</RouterLink> -->
+      <button @click="userState.logout">Logout</button>
     </div>
 
     <div v-else>

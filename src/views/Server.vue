@@ -35,8 +35,10 @@
     const { guildID } = routerTest.params
 
     try {
-      const ok = await api.post(`/server/${guildID}`, server.value)
-      console.log(ok)
+      const { data } = await api.post(`/server/${guildID}`, server.value)
+      const updates = data.tempVoiceChannels as any
+      server.value = { ...updates, ...server.value }
+      console.log(data)
       saved = 'Saved'
     } catch (err) {
       console.error(err)

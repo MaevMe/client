@@ -10,5 +10,10 @@ export const useUserStore = defineStore('user', {
     async getUser() {
       this.user = await (await api.post('/me', {}, { withCredentials: true })).data
     },
+    async logout() {
+      await api.get('/logout')
+      localStorage.clear()
+      this.user = null
+    },
   },
 })
